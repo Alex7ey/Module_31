@@ -32,12 +32,4 @@ public class Enemy : MonoBehaviour, IMovable, IDamagable, IDestroyed
         _health.Died -= Destroy;
         Destroy(gameObject);
     }
-
-    private void OnTriggerEnter(Collider collision)
-    {
-        if(collision.TryGetComponent(out Hero character))
-        {
-            character.TakeDamage(1);
-        }
-    }
 }
