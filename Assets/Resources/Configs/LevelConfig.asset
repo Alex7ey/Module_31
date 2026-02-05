@@ -17,5 +17,5 @@ MonoBehaviour:
   <MaxAliveEnemies>k__BackingField: 5
   <KillQuota>k__BackingField: 3
   <TimeToSurvive>k__BackingField: 7
-  <WinCondition>k__BackingField: 1
-  <LoseCondition>k__BackingField: 3
+  <WinCondition>k__BackingField: 0
+  <LoseCondition>k__BackingField: 2

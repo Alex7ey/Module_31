@@ -14,7 +14,7 @@ public class EnemySpawner : MonoBehaviour
 
     private EnemyConfig _enemyConfig;
     private LevelConfig _levelConfig;
-    private UpdateService _controllersUpdateService;
+    private UpdateService _updateService;
 
     public event Action<Enemy> Spawned;
 
@@ -24,7 +24,7 @@ public class EnemySpawner : MonoBehaviour
 
         _levelConfig = levelConfig;
         _enemyCount = levelConfig.TotalEnemies;
-        _controllersUpdateService = controllerUpdateService;
+        _updateService = controllerUpdateService;
     }
 
     public IEnumerator ProcessSpawn()
@@ -32,11 +32,9 @@ public class EnemySpawner : MonoBehaviour
         for (int i = 0; i < _enemyCount; i++)
         {
             yield return new WaitForSeconds(_levelConfig.EnemySpawnRate);
-            Enemy enemy = _enemyFactory.Create(_spawnPosition[Random.Range(0, _spawnPosition.Length)].position, _enemyConfig);
-            AgentDirectionController agentDirectionController = new(enemy, _enemyConfig.DirectionChangeIntervalEnemy);
+            Enemy enemy = _enemyFactory.Create(_spawnPosition[Random.Range(0, _spawnPosition.Length)].position, _enemyConfig, _updateService);
 
-            Spawned?.Invoke(enemy);
-            _controllersUpdateService.Add(agentDirectionController, () => enemy.IsDestroyed);
+            Spawned?.Invoke(enemy);         
         }
     }
 

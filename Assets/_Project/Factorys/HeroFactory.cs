@@ -9,7 +9,7 @@ public class HeroFactory
         HeroMover mover = new (character.GetComponent<Rigidbody>(), config.MovementSpeed);
         Rotator rotator = new(character.transform, config.RotationSpeed);   
 
-        character.Initialize(mover, rotator);
+        character.Initialize(mover, rotator, new Health(config.Health));
 
         return character;
     }

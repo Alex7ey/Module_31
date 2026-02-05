@@ -7,16 +7,18 @@ public class Hero : MonoBehaviour, IMovable, IShooter, IDestroyed, IDamagable
     private Rotator _rotator;
     private Shooter _shooting;
     private HeroMover _mover;
-
-    private int _health = 1;
+    private Health _health;
 
     public bool IsDestroyed { get; private set; }
 
-    public void Initialize(HeroMover mover, Rotator rotator)
+    public void Initialize(HeroMover mover, Rotator rotator, Health health)
     {
         _mover = mover;
         _rotator = rotator;
+        _health = health;
+
         _shooting = new(_shootPosition);
+        _health.Died += Destroy;
     }
 
     public void Move(Vector3 direction)
@@ -33,16 +35,10 @@ public class Hero : MonoBehaviour, IMovable, IShooter, IDestroyed, IDamagable
     public void Destroy()
     {
         IsDestroyed = true;
+        _health.Died -= Destroy;
+
         Destroy(gameObject);
     }
 
-    public void TakeDamage(int damage)
-    {
-        _health -= damage;
-
-        if (_health <= 0)
-        {
-            Destroy();
-        }
-    }
+    public void TakeDamage(int damage) => _health.TakeDamage(damage);
 }

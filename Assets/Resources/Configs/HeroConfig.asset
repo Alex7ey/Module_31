@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d81ec1710ad2c394ea0c3afadd5414d2, type: 3}
   m_Name: HeroConfig
   m_EditorClassIdentifier: 
-  <Health>k__BackingField: 5
+  <Health>k__BackingField: 1
   <Prefab>k__BackingField: {fileID: 5981683436007874488, guid: b44c77c0d7dd6f24ab375de411b0c06b,
     type: 3}
   <RotationSpeed>k__BackingField: 400
